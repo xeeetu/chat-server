@@ -39,11 +39,19 @@ func main() {
 	}
 	fmt.Printf("Create result: %v", res)
 
-	_, err = c.SendMessage(ctx, &desc.SendMessageRequest{
+	_, err1 := c.SendMessage(ctx, &desc.SendMessageRequest{
 		From:      "Alex",
 		Text:      "Hello world",
 		Timestamp: timestamppb.New(time.Now().UTC()),
 	})
 
-	_, err = c.Delete(ctx, &desc.DeleteRequest{Id: gofakeit.Int64()})
+	if err1 != nil {
+		log.Fatal(err1)
+	}
+
+	_, err2 := c.Delete(ctx, &desc.DeleteRequest{Id: gofakeit.Int64()})
+
+	if err2 != nil {
+		log.Fatal(err2)
+	}
 }
