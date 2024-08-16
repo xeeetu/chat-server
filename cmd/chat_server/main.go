@@ -21,6 +21,7 @@ type server struct {
 	desc.UnimplementedChatV1Server
 }
 
+// Create создаёт чат, получает массив пользователей
 func (s *server) Create(ctx context.Context, in *desc.CreateRequest) (*desc.CreateResponse, error) {
 	select {
 	case <-ctx.Done():
@@ -34,6 +35,7 @@ func (s *server) Create(ctx context.Context, in *desc.CreateRequest) (*desc.Crea
 	return &desc.CreateResponse{Id: gofakeit.Int64()}, nil
 }
 
+// Delete удаляет чат по id
 func (s *server) Delete(ctx context.Context, in *desc.DeleteRequest) (*emptypb.Empty, error) {
 	select {
 	case <-ctx.Done():
@@ -47,6 +49,7 @@ func (s *server) Delete(ctx context.Context, in *desc.DeleteRequest) (*emptypb.E
 	return &emptypb.Empty{}, nil
 }
 
+// SendMessage отправляет сообщение на сервер
 func (s *server) SendMessage(ctx context.Context, in *desc.SendMessageRequest) (*emptypb.Empty, error) {
 	select {
 	case <-ctx.Done():
